@@ -3,8 +3,8 @@
 ```
 代理应用在spring的事务处理中，处理异常回滚等。
 在Spring的AOP编程中:
-如果加入容器的目标对象有实现接口,用JDK代理
-如果目标对象没有实现接口,用Cglib代理
+ 如果加入容器的目标对象有实现接口,用JDK代理
+ 如果目标对象没有实现接口,用Cglib代理
 ```
 
 ```
@@ -30,7 +30,7 @@ public class UserDao implements IUserDao {
 
 ## 1、静态代理
 ```
-静态代理在使用时,需要定义接口或者父类,被代理对象与代理对象一起实现相同的接口或者是继承相同父类.
+ 静态代理在使用时,需要定义接口或者父类,被代理对象与代理对象一起实现相同的接口或者是继承相同父类.
 ```
 ```
 /**
@@ -117,28 +117,21 @@ public class App {
 ```
 ## 3、Cglib代理
 
-```
+``` 
 Spring的核心包中已经包括了Cglib功能,引入spring-core-3.2.5.jar
 
-###代理的类不能为final,否则报错
-###目标对象的方法如果为final/static,那么就不会被拦截,即不会执行目标对象额外的业务方法.
+代理的类不能为final,否则报错
+目标对象的方法如果为final/static,那么就不会被拦截,即不会执行目标对象额外的业务方法.
 
-```
 
-···
-/**
- * 没有实现任何接口
- */
 public class UserDao {
 
     public void save() {
       ///TODO
     }
 }
-···
 
-···
-public class ProxyFactory implements MethodInterceptor{
+public class ProxyFactory implements MethodInterceptor {
 
     private Object target;
     public ProxyFactory(Object target) {
@@ -166,10 +159,6 @@ public class ProxyFactory implements MethodInterceptor{
     }
 }
 
-···
-
-···
-
 /**
  * 测试类
  */
@@ -184,4 +173,4 @@ public class App {
         proxy.save();
     }
 }
-···
+```
